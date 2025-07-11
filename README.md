@@ -70,7 +70,7 @@ A sleek and secure desktop application to manage your passwords — with encrypt
 
  - Use PyInstaller to convert the app into a standalone executable:
 
-pyinstaller --onefile --windowed --icon=assets/logo.ico main.py
+    pyinstaller --onefile --windowed --icon=assets/logo.ico main.py
 
 👉 The .exe file will be located in the dist/ folder after the build.
 
