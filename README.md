@@ -1,80 +1,67 @@
-# 🔐 Password Manager App
+🔐 Password Manager App
+A sleek and secure desktop application to manage your passwords — with encryption, dark/light mode toggle, clipboard support, and more. Built using Python and Tkinter.
 
-A sleek and secure desktop application to manage your passwords with encryption, dark/light mode toggle, and clipboard support — all built using Python and Tkinter.
+✨ Features
+🌙 Dark & Light Mode toggle with icon-based switch (🌞 / 🌚)
 
----
+🔐 AES Encryption using cryptography to securely store passwords
 
-## ✨ Features
+🎲 Strong Password Generator (letters, symbols, numbers)
 
-- 🌙 **Dark Mode & Light Mode** toggle with icon-based switch (🌞 / 🌚)
-- 🔐 **AES Encryption** using `cryptography` to securely store passwords
-- 🎲 **Strong Password Generator** (letters, symbols, numbers)
-- 🔎 **Search Functionality** to retrieve saved credentials by website
-- 💾 **Local JSON Storage** (encrypted)
-- 📋 **Clipboard Copy** for generated passwords
-- 🖼️ Polished **Tkinter GUI** with custom icons and colors
+🔎 Search Functionality to retrieve saved credentials by website
 
----
+💾 Local Encrypted JSON Storage
 
-## 📸 Screenshots
+📋 Clipboard Copy for generated passwords
 
-| Dark Mode                        | Light Mode                         |
-|----------------------------------|------------------------------------|
-| ![Dark](assets/dark_preview.png) | ![Light](assets/light_preview.png) |
+🖼️ Polished Tkinter GUI with custom icons and colors
 
----
+📸 Screenshots
+Dark Mode	Light Mode
+	
 
-## 🗂️ Folder Structure
-
+🗂️ Folder Structure
     password_manager/
-    ├── main.py # Main GUI and app logic
+    ├── main.py               # Main GUI and app logic
     ├── core/
-    │ ├── password_logic.py # PasswordGenerator class
-    │ └── crypto_util.py # Encryptor class for encryption/decryption
+    │   ├── password_logic.py # PasswordGenerator class
+    │   └── crypto_util.py    # Encryptor class for encryption/decryption
     ├── assets/
-    │ ├── logo.png # App logo
-    │ ├── sun.png # Light mode icon
-    │ ├── moon.png # Dark mode icon
-    │ ├── password_data.json # Encrypted password storage (ignored by git)
-    │ └── secret.key # Encryption key (ignored by git)
-    ├── requirements.txt # Python dependencies
-    ├── README.md # You're reading it!
-    └── .gitignore # Prevents sensitive files from being tracked
+    │   ├── logo.png          # App logo
+    │   ├── sun.png           # Light mode icon
+    │   ├── moon.png          # Dark mode icon
+    │   ├── password_data.json# Encrypted password storage (git-ignored)
+    │   └── secret.key        # Encryption key (git-ignored)
+    ├── requirements.txt      # Python dependencies
+    ├── README.md             # This file
+    └── .gitignore            # Prevents sensitive files from being tracked
 
----
-
-## 🚀 Getting Started
-
-### 1. Clone the repository
-
-```bash
+🚀 Getting Started
+1. Clone the repository
 git clone https://github.com/YOUR_USERNAME/password-manager.git
 cd password-manager
 
+2. Install dependencies
+pip install -r requirements.txt
 
-### 2. Install dependencies
-    pip install -r requirements.txt
+3. Run the app
+python main.py
 
-### 3. Run the app
-    python main.py
+🛠 Technologies Used
+tkinter — GUI framework
 
+pyperclip — Clipboard integration
 
-### 🛠 Technologies Used
-    tkinter — GUI framework
+cryptography — AES encryption for password security
 
-    pyperclip — Clipboard copy
+json — Data storage format
 
-    cryptography — AES encryption for password security
-
-    json — Data storage format
-
-### 🧪 How to Build Executable (Windows)
+🧪 Build Executable (Windows)
+Use PyInstaller to convert the app into a standalone executable:
     pyinstaller --onefile --windowed --icon=assets/logo.ico main.py
+👉 The .exe file will be located in the dist/ folder after the build.
 
-👉 After build, find the .exe in the dist/ folder.
+🛡️ Security Notes
+Passwords are encrypted using a secure Fernet key, stored in assets/secret.key.
 
-
-### 🛡️ Security Notes
-   - Passwords are encrypted with a secure Fernet key stored in assets/secret.key.
-
-   - The password_data.json and secret.key are excluded from Git using .gitignore.
+Both password_data.json and secret.key are excluded from Git using .gitignore for security reasons.
