@@ -1,4 +1,4 @@
-# 🔐 Password Manager App
+# 🔐 Password Manager App **VaultKey**
 
 A sleek and secure desktop application to manage your passwords — with encryption, dark/light mode toggle, clipboard support, and more. Built using Python and Tkinter.
 
