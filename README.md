@@ -71,7 +71,11 @@ A sleek and secure desktop application to manage your passwords — with encrypt
 
  - Use PyInstaller to convert the app into a standalone executable:
 
+<<<<<<< HEAD
 python -m PyInstaller --onefile --windowed --icon=assets/logo.ico --add-data "assets;assets" --name VaultKey main.py
+=======
+    pyinstaller --onefile --windowed --icon=assets/logo.ico main.py
+>>>>>>> 0334e15621e8aa647e19095f27c3c361076c8561
 
 👉 The .exe file will be located in the dist/ folder after the build.
 
