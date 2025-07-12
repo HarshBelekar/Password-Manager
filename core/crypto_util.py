@@ -1,9 +1,19 @@
 from cryptography.fernet import Fernet
 import os
+import sys
 
-KEY_PATH = "assets/secret.key"
+def resource_path(relative_path):
+    """ Get absolute path to resource (works for PyInstaller .exe) """
+    try:
+        base_path = sys._MEIPASS  # PyInstaller sets this at runtime
+    except AttributeError:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+KEY_PATH = resource_path("assets/secret.key")
 
 def generate_key():
+    os.makedirs(os.path.dirname(KEY_PATH), exist_ok=True)
     key = Fernet.generate_key()
     with open(KEY_PATH, "wb") as f:
         f.write(key)

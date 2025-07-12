@@ -6,6 +6,17 @@ import random
 import pyperclip
 from core.crypto_util import Encryptor
 from core.password_logic import PasswordGenerator
+import sys
+import os
+
+def resource_path(relative_path):
+    """ Get absolute path to resource (works for .py and bundled .exe) """
+    try:
+        base_path = sys._MEIPASS
+    except AttributeError:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
 
 #Create Class
 class PasswordManager():
@@ -20,8 +31,8 @@ class PasswordManager():
         self.root.resizable(False, False)
         self.dark_mode = True  # Start in dark mode by default
         
-        self.sun_icon = tk.PhotoImage(file="assets/sun.png")   # Light mode icon
-        self.moon_icon = tk.PhotoImage(file="assets/moon.png") # Dark mode icon
+        self.sun_icon = tk.PhotoImage(file=resource_path("assets/sun.png")) # Light mode icon
+        self.moon_icon = tk.PhotoImage(file=resource_path("assets/moon.png")) # Dark mode icon
 
         self.setup_ui()
 
@@ -29,7 +40,7 @@ class PasswordManager():
     def setup_ui(self):
         #Setup Image on Screen
         canva = tk.Canvas(width=200, height=200, highlightthickness=0)  #Setup Canva Screen & Remove border
-        logo_image = tk.PhotoImage(file="assets/logo.png") #Take Image
+        logo_image = tk.PhotoImage(file=resource_path("assets/logo.png")) #Take Image
         canva.create_image(100, 100, image=logo_image) #Display Image on Screen 
         canva.grid(row=0, column=1)
         self.logo_image = logo_image  # prevent garbage collection
@@ -116,9 +127,11 @@ class PasswordManager():
             #Display the messagebox to show user the filed is empty 
             messagebox.showinfo(title="Oops", message="Please don't leave any field Empty!") 
             return
+        
+        data_path = resource_path("assets/password_data.json") 
 
         try:
-            with open("assets/password_data.json", "r") as data_file: #Open Json file in Read mode
+            with open(data_path, "r") as data_file: #Open Json file in Read mode
                 data = json.load(data_file) #Read data from json file
         except (FileNotFoundError, json.JSONDecodeError): #If file not found or Empty
             data = {} #It starts with a blank dictionary.
@@ -127,7 +140,7 @@ class PasswordManager():
         data.update(new_data) #If the website already exists, it overwrites the old entry with the new one.
 
         #Saves the updated data dictionary back to password_data.json.
-        with open("assets/password_data.json", "w") as data_file: 
+        with open(data_path, "w") as data_file: 
             json.dump(data, data_file, indent=4) # Formatting it nicely (indent=4)
 
         #Clears all fields for the next entry.
@@ -143,15 +156,16 @@ class PasswordManager():
     def search(self):
         website = self.website_entry.get().capitalize() #Get Website name
         if len(website) != 0: #Check the website filed is empty or not
+            data_path = resource_path("assets/password_data.json")
             try:
-                with open("assets/password_data.json", "r") as data_file: #Open Json file in Read mode
+                with open(data_path, "r") as data_file: #Open Json file in Read mode
                     data = json.load(data_file) #Read data from json file 
                     email = data[website]["Email"] #Get email from data
                     encrypted_pw = data[website]["Password"]
                     password = self.encryptor.decrypt(encrypted_pw) #Get password from data
                     messagebox.showinfo(title=website, message=f"Email: {email}\nPassword: {password}") #Show search result in messagebox
             except FileNotFoundError: #IF file not found then create it
-                open("./password_data.json", "w") #Open Json file in Write mode
+                open(data_path, "w") #Open Json file in Write mode
             except json.JSONDecodeError: #If File is empty 
                 messagebox.showerror(title="Error", message="File is empty or corrupted.") #Show File is empty or corrupted in messagebox
             except KeyError: #Website not in file

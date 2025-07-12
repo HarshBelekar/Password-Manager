@@ -13,6 +13,7 @@ A sleek and secure desktop application to manage your passwords — with encrypt
 - 💾 **Local JSON Storage** (encrypted)
 - 📋 **Clipboard Copy** for generated passwords
 - 🖼️ Polished **Tkinter GUI** with custom icons and colors
+- 💻 Fully compatible with **PyInstaller** for `.exe` packaging
 
 ---
 
@@ -46,7 +47,7 @@ A sleek and secure desktop application to manage your passwords — with encrypt
 # 🚀 Getting Started
 
 ### 1. Clone the repository
-    git clone https://github.com/YOUR_USERNAME/password-manager.git
+    git clone https://github.com/HarshBelekar/Password-Manager.git
     cd password-manager
 
 ### 2. Install dependencies
@@ -70,7 +71,7 @@ A sleek and secure desktop application to manage your passwords — with encrypt
 
  - Use PyInstaller to convert the app into a standalone executable:
 
-pyinstaller --onefile --windowed --icon=assets/logo.ico main.py
+python -m PyInstaller --onefile --windowed --icon=assets/logo.ico --add-data "assets;assets" --name VaultKey main.py
 
 👉 The .exe file will be located in the dist/ folder after the build.
 
@@ -80,6 +81,14 @@ pyinstaller --onefile --windowed --icon=assets/logo.ico main.py
 
  - Passwords are encrypted using a secure Fernet key, stored in assets/secret.key.
 
- - Both password_data.json and secret.key are excluded from Git using .gitignore for security reasons.
+ - Both assets/password_data.json and assets/secret.key are ignored from Git tracking using .gitignore to protect your sensitive data.
+
+# 📦 Future Improvements
+
+ - ✅ Export/import encrypted backups
+
+ - ✅ Add master password authentication
+
+ - ✅ Add support for cloud sync or database-based storage (optional)
 
 ---
